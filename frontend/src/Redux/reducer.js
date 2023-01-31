@@ -28,21 +28,9 @@ export const reducer = (state = init, { type, payload }) => {
         loading: false,
       };
     }
-    case GET_ALL_BLOGS: {
-      return {
-        ...state,
-allBlogs:[...payload],
-        loading: false,
-      };
-    }
 
-    case GET_SINGLE_BLOG: {
-      return {
-        ...state,
-singleBlog:{...payload},
-        loading: false,
-      };
-    }
+
+
 
     case LOADING:{
       return {...state,loading:true}
