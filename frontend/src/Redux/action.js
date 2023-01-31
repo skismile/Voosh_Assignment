@@ -1,5 +1,10 @@
 import { getData, postData } from "../Logic/api";
-import { ADD_ORDER, LOADING, USER_LOGOUT_SUCCESS, USER_SIGNIN_SUCCESS } from "./type";
+import {
+  ADD_ORDER,
+  LOADING,
+  USER_LOGOUT_SUCCESS,
+  USER_SIGNIN_SUCCESS,
+} from "./type";
 
 export const userSigninAction = (cred) => async (dispatch) => {
   try {
@@ -19,8 +24,6 @@ export const userSigninAction = (cred) => async (dispatch) => {
   }
 };
 
-
-
 export const addOrderAction = (cred) => async (dispatch) => {
   try {
     let d = await postData("http://localhost:8080/order/add-order", cred);
@@ -38,8 +41,6 @@ export const addOrderAction = (cred) => async (dispatch) => {
     return e;
   }
 };
-
-
 
 export const userLogoutAction = () => {
   return {

@@ -1,5 +1,3 @@
-
-
 const { Schema, model, default: mongoose } = require("mongoose");
 
 const OrderSchema = new Schema({

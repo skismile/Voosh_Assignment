@@ -1,14 +1,12 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import axios from "axios";
+
 import {
   Box,
   Flex,
   FormLabel,
   Input,
-  Image,
   useToast,
-  Select,
   Center,
   Heading,
 } from "@chakra-ui/react";
@@ -42,10 +40,9 @@ const Signup = () => {
       return;
     }
 
-    console.log(formData)
     try {
       let d = await postData("http://localhost:8080/user/add-user", formData);
-      console.log(d)
+      console.log(d);
       toast({
         title: "Account created.",
         description: "We've created your account for you.",
@@ -59,9 +56,8 @@ const Signup = () => {
         navigate("/");
       }, 2000);
     } catch (e) {
-      console.log(e.response.data,"----------------------");
       toast({
-        title:`${e.response.data}`|| "Signup Failed",
+        title: `${e.response.data}` || "Signup Failed",
         status: "error",
         duration: 5000,
         isClosable: true,
@@ -126,7 +122,6 @@ const Signup = () => {
                 }}
               />
             </form>
-          
           </Box>
         </Box>
       </Flex>
