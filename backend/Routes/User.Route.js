@@ -15,7 +15,7 @@ app.post("/add-user", async (req, res) => {
     phoneNumber: userDetails.phoneNumber,
   });
   if (user) {
-    return res.status(404).send("user already exist");
+    return res.status(401).send("user already exist");
   } else {
     try {
       await UserModel.create(userDetails);
@@ -26,7 +26,7 @@ app.post("/add-user", async (req, res) => {
         message: "Account created successfully",
       });
     } catch (e) {
-      res.send({
+      res.status(401).send({
         message: "something went wrong",
         err: e.message,
       });
@@ -53,10 +53,10 @@ app.post("/login-user", async (req, res) => {
         name: user.name,
       });
     } else {
-      return res.status(404).send("Invalid credential");
+      return res.status(401).send("Invalid credential");
     }
   } catch (e) {
-    return res.status(404).send(e.message);
+    return res.status(401).send(e.message);
   }
 });
 

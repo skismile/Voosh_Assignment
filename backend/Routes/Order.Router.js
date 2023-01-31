@@ -9,7 +9,7 @@ app.get("/", async (req, res) => {
     // console.log("wqewqdwq", query);
     res.send(orders);
   } catch (e) {
-    res.send(e);
+    res.status(501).send(e);
   }
 });
 app.post("/add-order", async (req, res) => {
@@ -25,7 +25,7 @@ app.post("/add-order", async (req, res) => {
       message: "order created succesfully",
     });
   } catch (e) {
-    res.status(404).send(e);
+    res.status(501).send(e);
     console.log(e);
   }
 });
