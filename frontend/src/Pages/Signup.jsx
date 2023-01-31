@@ -56,12 +56,12 @@ const Signup = () => {
       });
 
       setTimeout(() => {
-        navigate("/signin");
+        navigate("/");
       }, 2000);
     } catch (e) {
-      console.log(e);
+      console.log(e.response.data,"----------------------");
       toast({
-        title: "Signup Failed",
+        title:`${e.response.data}`|| "Signup Failed",
         status: "error",
         duration: 5000,
         isClosable: true,

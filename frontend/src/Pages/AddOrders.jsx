@@ -1,6 +1,6 @@
 
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import {
   Box,
@@ -15,17 +15,18 @@ import {
 } from "@chakra-ui/react";
 import { Navigate, useNavigate } from "react-router-dom";
 
-import { userSigninAction } from "../Redux/action";
+import { addOrderAction,} from "../Redux/action";
 
+let init={
 
-const Signin = () => {
-  const [formData, setFormdata] = useState({
-    phoneNumber: "",
-    password: "",
-  });
+  sub_total: "",
+}
+const AddOrders = () => {
+  const [formData, setFormdata] = useState(init);
   const dispatch = useDispatch();
   const toast = useToast();
   const navigate = useNavigate();
+const store=useSelector(store=>store.all.loggedUser)
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -36,27 +37,26 @@ const Signin = () => {
 
   const handleSubmit =async (e) => {
     e.preventDefault();
-if(formData.phoneNumber==""||formData.password=="")
+    console.log(formData)
+if(formData.phoneNumber==""||formData.sub_total=="")
 {
 alert("fill all input")
   return
 }
+console.log(store);
+let res=await dispatch(addOrderAction({...formData,user_id:store.user_id,phoneNumber:store.phoneNumber}))
 
- let res=await dispatch(userSigninAction(formData))
 
-console.log(res,"singgg")
 
-if(res.message==="Login Success"){
+if(res.message==="order created succesfully"){
   toast({
-    title: "Login Success.",
+    title: "order created succesfully",
     status: "success",
     duration: 2000,
     isClosable: true,
     position: "top",
   });
-  setTimeout(() => {
-    navigate("/addorder");
-  }, 2000);
+ 
 } 
 
 
@@ -73,7 +73,7 @@ else{
 
 }
 
-
+setFormdata(init)
   }
 
   return (
@@ -81,22 +81,17 @@ else{
       <Flex bg="gray.100" justify="center" p="10"  >
         <Box bg="white" p={5} rounded="md" w={["90%","70%","50%","40%", "35%"]} borderTopRightRadius={"30"}
                 borderBottomLeftRadius={"30"} >
-         <Center> <Heading>Sign<span style={{color:"#4fd675"}} >in</span></Heading></Center>
+         <Center> <Heading>Add<span style={{color:"#4fd675"}} >Orders</span></Heading></Center>
           <Box textAlign={"left"} p={10}>
             <form onSubmit={handleSubmit}>
         
-              <FormLabel>Phone Number</FormLabel>
+              
+              <FormLabel mt={2}>Sub Total</FormLabel>
               <Input
-                placeholder="Phone Number"
-                name="phoneNumber"
+                placeholder="Sub Total"
+                name="sub_total"
                 type={"number"}
-                onChange={handleChange}
-              />
-              <FormLabel mt={2}>Password</FormLabel>
-              <Input
-                placeholder="password"
-                name="password"
-                type={"password"}
+                value={formData.sub_total}
                 onChange={handleChange}
               />
          
@@ -104,7 +99,7 @@ else{
               <Input
                 mt={10}
                 type="submit"
-                value="Signin"
+                value="Add Order"
                 color={"white"}
                 bg="#4fd675"
                 w="full"
@@ -132,4 +127,4 @@ else{
 
 
 
-export default Signin;
+export default AddOrders;

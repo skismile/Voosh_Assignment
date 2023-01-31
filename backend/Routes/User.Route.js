@@ -9,11 +9,20 @@ app.get("/", (req, res) => {
 app.post("/add-user", async (req, res) => {
   const userDetails = req.body;
 
+
+  const user=await UserModel.findOne({phoneNumber:userDetails.phoneNumber})
+  if(user)
+  {
+    return res.status(404).send("user already exist")
+  }else{
+
+    
+    
   try {
     await UserModel.create(userDetails);
-
+    
     console.log(userDetails);
-
+    
     res.send({
       message: "Account created successfully",
     });
@@ -23,11 +32,12 @@ app.post("/add-user", async (req, res) => {
       err: e.message,
     });
   }
+}
 });
 
 app.post("/login-user", async (req, res) => {
-  const { phoneumber, password } = req.body;
-
+  const { phoneNumber, password } = req.body;
+  
   console.log(phoneNumber, password);
   try {
     const user = await UserModel.findOne({ phoneNumber, password });
@@ -43,6 +53,9 @@ app.post("/login-user", async (req, res) => {
       return res.send({
         message: "Login Success",
         token,
+        user_id:user._id,
+        phoneNumber:user.phoneNumber,
+        name:user.name
       });
     } else {
       return res.status(404).send("Invalid credential");

@@ -1,11 +1,10 @@
-import { GET_ALL_BLOGS, GET_SINGLE_BLOG, LOADING, USER_LOGOUT_SUCCESS, USER_SIGNIN_SUCCESS } from "./type";
+import {LOADING, USER_LOGOUT_SUCCESS, USER_SIGNIN_SUCCESS } from "./type";
 
 const init = {
   loggedUser: {},
   isAuth: false,
   loading: false,
-  allBlogs:[],
-  singleBlog:{}
+
 };
 
 export const reducer = (state = init, { type, payload }) => {
