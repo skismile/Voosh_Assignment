@@ -8,7 +8,8 @@ const MyOrders = () => {
   const store = useSelector((store) => store.all.loggedUser);
   const [data, setData] = useState([]);
   useEffect(() => {
-    getData(`http://localhost:8080/order?userId=${store.user_id}`).then(
+    http://localhost:8080/
+    getData(`https://awful-frog-sunglasses.cyclic.app/order?userId=${store.user_id}`).then(
       (res) => {
         console.log(res);
         setData(res);

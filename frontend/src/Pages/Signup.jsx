@@ -41,7 +41,8 @@ const Signup = () => {
     }
 
     try {
-      let d = await postData("http://localhost:8080/user/add-user", formData);
+      // s://awful-frog-sunglasses.cyclic.app
+      let d = await postData("https://awful-frog-sunglasses.cyclic.app/user/add-user", formData);
       console.log(d);
       toast({
         title: "Account created.",
@@ -57,7 +58,7 @@ const Signup = () => {
       }, 2000);
     } catch (e) {
       toast({
-        title: `${e.response.data}` || "Signup Failed",
+        title: `${e?.response.data}` || "Signup Failed",
         status: "error",
         duration: 5000,
         isClosable: true,
