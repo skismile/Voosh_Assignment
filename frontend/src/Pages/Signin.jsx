@@ -50,7 +50,7 @@ const Signin = () => {
       }, 2000);
     } else {
       toast({
-        title: `${res.message}`,
+        title: `Authententication Failed`,
         status: "error",
         duration: 3000,
         isClosable: true,
